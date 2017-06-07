@@ -10,7 +10,7 @@
        <div class="ownOrder">
          <mu-list>
            <mu-list-item title="我的寄件订单" >
-             <mu-avatar  size="32"  icon="assignment" backgroundColor="#EBBE49" slot="leftAvatar"/>
+             <mu-avatar  :size=32  icon="assignment" backgroundColor="#EBBE49" slot="leftAvatar"/>
              <mu-icon value="keyboard_arrow_right" slot="right"/>
            </mu-list-item>
          </mu-list>
@@ -18,7 +18,7 @@
        <div class="ownAddress">
         <mu-list>
           <mu-list-item title="地址管理" >
-            <mu-avatar size="32"  icon="pin_drop" backgroundColor="blue" slot="leftAvatar"/>
+            <mu-avatar :size=32  icon="pin_drop" backgroundColor="blue" slot="leftAvatar"/>
             <mu-icon value="keyboard_arrow_right" slot="right"/>
           </mu-list-item>
         </mu-list>
@@ -26,7 +26,7 @@
        <div class="ownSuggest">
         <mu-list>
           <mu-list-item title="意见反馈" >
-            <mu-avatar  size="32" icon="insert_comment" backgroundColor="blue" slot="leftAvatar"/>
+            <mu-avatar  :size=32 icon="insert_comment" backgroundColor="blue" slot="leftAvatar"/>
             <mu-icon value="keyboard_arrow_right" slot="right"/>
           </mu-list-item>
         </mu-list>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomeComponent from '@/components/mainComponents/HomeComponent.vue'
+import InfoComponent from '@/components/subComponents/InfoComponent.vue'
 import Hello from '@/components/Hello.vue'
 
 Vue.use(Router);
@@ -16,6 +17,11 @@ export default new Router({
       path: '/hello',
       name: 'hello',
       component: Hello
+    },
+    {
+      path:'/Info',
+      name:'Info',
+      component:InfoComponent
     }
   ]
 })

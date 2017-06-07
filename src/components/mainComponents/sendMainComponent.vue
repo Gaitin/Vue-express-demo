@@ -16,7 +16,6 @@
         <div class="formLine">
           <span class="FormTitle" >选择地区</span>
           <selectAddressInput></selectAddressInput>
-          <!--<mu-text-field hintText="选择地区" class="demo-divider-form" :underlineShow="false" @focus="openAddressBottomSheet" :value="address"/>-->
         </div>
         <mu-divider/>
         <div class="formLine">

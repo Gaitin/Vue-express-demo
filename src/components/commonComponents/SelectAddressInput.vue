@@ -1,6 +1,9 @@
 <template>
     <div class="selectAddressInput">
-      <mu-text-field hintText="选择地区" class="demo-divider-form" :underlineShow="false" @focus="openAddressBottomSheet" :value="address"/>
+      <!--<mu-text-field hintText="选择地区" class="demo-divider-form" :underlineShow="false" @focus="openAddressBottomSheet" :value="address"/>-->
+      <div class="AddressBox demo-divider-form">
+        <span hintText="选择地区"  :underlineShow="false" @click="openAddressBottomSheet" >{{address[0]}} {{address[1]}}</span>
+      </div>
       <div class="AddressSelect">
         <mu-bottom-sheet :open="AddressBottomSheet" @close="closeAddressBottomSheet">
           <div class="demo-picker-container">
@@ -120,6 +123,16 @@
   .demo-divider-form {
     margin-bottom: 0;
     margin-left: 20px;
+  }
+  .AddressBox{
+    font-size: 16px;
+    width: 256px;
+    min-height: 48px;
+    display: inline-block;
+    span{
+      display: block;
+      padding-top: 9px;
+    }
   }
 
 </style>

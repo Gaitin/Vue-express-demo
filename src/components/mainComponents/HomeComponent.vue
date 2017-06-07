@@ -72,5 +72,7 @@
   .tabPanel{
     flex: 1;
   }
-
+  .mu-paper{
+    /*z-index: -1*/
+  }
 </style>

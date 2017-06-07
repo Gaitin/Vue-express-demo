@@ -4,9 +4,9 @@
           <img src="../../assets/images/df2e44a170b12279c3b7d3fe57dcdf0a.jpg" alt="">
 
           <div class="sbox">
-            <mu-text-field   hintText="快递单号" type="text" iconClass="iconEr" />
+            <mu-text-field  v-model="textValue"  hintText="快递单号" type="text" iconClass="iconEr" />
             <i class="material-icons iconCamera">&#xE3B5;</i>
-            <div class="btnSearch">
+            <div class="btnSearch" @click="showDetail">
               <i class="material-icons ">search</i>
             </div>
           </div>
@@ -18,8 +18,13 @@
     export default {
         data () {
             return {
-                msg: 'Welcome to Your Vue.js App'
+              textValue:''
             }
+        },
+        methods:{
+          showDetail:function () {
+            this.$router.push({path:'/info',query: {id:this.textValue}})
+          }
         }
     }
 </script>
@@ -37,6 +42,7 @@
      justify-content: center;
      flex-direction: column;
      align-items: center;
+     margin: 20px 0;
      /*background-color: #3481ED;*/
      /*background: url("../../assets/images/e555cd95955b76e8c20eaae05b7e82e2_opt.jpg")center no-repeat;*/
    }
