@@ -1,8 +1,8 @@
 <template>
     <div class="findMain">
-        <div class="searchBox">
+      <mu-toast v-if="toast" message="快递号不能为空" />
+      <div class="searchBox">
           <img src="../../assets/images/df2e44a170b12279c3b7d3fe57dcdf0a.jpg" alt="">
-
           <div class="sbox">
             <mu-text-field  v-model="textValue"  hintText="快递单号" type="text" iconClass="iconEr" />
             <i class="material-icons iconCamera">&#xE3B5;</i>
@@ -18,12 +18,19 @@
     export default {
         data () {
             return {
-              textValue:''
+              textValue:'',
+              toast: false
             }
         },
         methods:{
           showDetail:function () {
-            this.$router.push({path:'/info',query: {id:this.textValue}})
+              if(this.textValue!=''){
+                this.$router.push({path:'/info',query: {id:this.textValue}})
+              }else{
+                this.toast = true;
+                if (this.toastTimer) clearTimeout(this.toastTimer)
+                this.toastTimer = setTimeout(() => { this.toast = false }, 2000)
+              }
           }
         }
     }
@@ -77,5 +84,9 @@
     background-color:#3481ED;
     color:#fff;
   }
-
+  .mu-toast{
+    left: 30%;
+    width: auto;
+    bottom: 50%;
+  }
 </style>

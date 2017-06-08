@@ -10,8 +10,14 @@
         <div class="paperTop">
           <mu-paper :zDepth="2">
             <mu-list>
-              <mu-list-item :title="infoData.com" :describeText="infoData.nu">
+              <mu-list-item v-if="!errorShow" :title="infoData.com" :describeText="'物流号：'+infoData.nu">
+                <mu-avatar icon="flight_takeoff" backgroundColor="blue" slot="leftAvatar" />
               </mu-list-item>
+              <div v-if="errorShow">
+                <mu-list-item  title="物流单号不存在" :describeText="'物流号：'+msg">
+                  <mu-avatar icon="warning" backgroundColor="red" slot="leftAvatar" />
+                </mu-list-item>
+              </div>
             </mu-list>
           </mu-paper>
         </div>
@@ -37,75 +43,35 @@
 </template>
 
 <script>
-    export default {
+  import {AppConfig} from "../../util/serverConfig";
+  import axios from 'axios'
+  export default {
         data () {
             return {
                 msg: 'Welcome to Your Vue.js App',
                 activeStep: 0,
-                infoData:{
-                  "message": "ok",
-                  "nu": "440342130610",
-                  "ischeck": "1",
-                  "condition": "F00",
-                  "com": "zhongtong",
-                  "status": "200",
-                  "state": "3",
-                  "data": [
-                    {
-                      "time": "2017-06-02 18:25:52",
-                      "ftime": "2017-06-02 18:25:52",
-                      "context": "[北京昌平二部中通] [北京市] [北京昌平二部中通]的派件已签收 感谢使用中通快递,期待再次为您服务!",
-                      "location": ""
-                    },
-                    {
-                      "time": "2017-06-02 15:05:10",
-                      "ftime": "2017-06-02 15:05:10",
-                      "context": "[北京昌平二部中通] [北京市] 快件已到达[北京昌平二部中通],业务员松兰堡18911227031正在第2次派件 电话:18911227031 请保持电话畅通、耐心等待",
-                      "location": ""
-                    },
-                    {
-                      "time": "2017-06-02 09:44:25",
-                      "ftime": "2017-06-02 09:44:25",
-                      "context": "[北京市内部] [北京市] 快件离开 [北京市内部]已发往[北京昌平二部中通]",
-                      "location": ""
-                    },
-                    {
-                      "time": "2017-06-02 09:14:37",
-                      "ftime": "2017-06-02 09:14:37",
-                      "context": "[北京] [北京市] 快件到达 [北京]",
-                      "location": ""
-                    },
-                    {
-                      "time": "2017-06-01 00:27:49",
-                      "ftime": "2017-06-01 00:27:49",
-                      "context": "[泉州中转部] [泉州市] 快件离开 [泉州中转部]已发往[北京]",
-                      "location": ""
-                    },
-                    {
-                      "time": "2017-06-01 00:14:06",
-                      "ftime": "2017-06-01 00:14:06",
-                      "context": "[泉州中转部] [泉州市] 快件到达 [泉州中转部]",
-                      "location": ""
-                    },
-                    {
-                      "time": "2017-05-31 19:33:27",
-                      "ftime": "2017-05-31 19:33:27",
-                      "context": "[泉州市场部] [泉州市] 快件离开 [泉州市场部]已发往[泉州中转部]",
-                      "location": ""
-                    },
-                    {
-                      "time": "2017-05-31 16:03:25",
-                      "ftime": "2017-05-31 16:03:25",
-                      "context": "[泉州市场部] [泉州市] [泉州市场部]的奥斯格尔已收件 电话:18650067511",
-                      "location": ""
-                    }
-                  ]
-                }
+                infoData:{},
+                errorShow:false
             }
         },
         created(){
           this.msg=this.$route.query.id?this.$route.query.id:'';
           console.log(this.$route.query.id);
+          this.msg=this.$route.query.id;
+          let params = {
+            id:this.$route.query.id
+          };
+          axios.get(AppConfig.url.getExpressDetail, {params}).then((res) => {
+            console.log(res);
+            if (res.status === 200) {
+              if(res.data.status===10001){
+                  console.log('订单不存在');
+                this.errorShow=true;
+              }else{
+                this.infoData=res.data;
+              }
+            }
+          })
         },
         methods:{
           turnBefore:function () {
