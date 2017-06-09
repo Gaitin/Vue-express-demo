@@ -24,7 +24,7 @@ app.get('/getED', function (req, res) {
   getExpress.getExpressDetail(req, res,params);
 });
 
-
+// let url='172.31.243.45';
 const server = app.listen(8081,function () {
   const host = server.address().address
   const port = server.address().port

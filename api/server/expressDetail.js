@@ -25,8 +25,8 @@ function getExpressDetail(req,res,params) {
         getDetail(req,res,paramsIn)
       }else{
         let message={
-          message:'订单不存在',
-          status:10001
+          message:"订单不存在",
+          status:"10001"
         };
         res.end(JSON.stringify(message));
       }

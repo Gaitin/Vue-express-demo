@@ -10,7 +10,7 @@
         <div class="paperTop">
           <mu-paper :zDepth="2">
             <mu-list>
-              <mu-list-item v-if="!errorShow" :title="infoData.com" :describeText="'物流号：'+infoData.nu">
+              <mu-list-item v-if="!errorShow" :title="infoData.com" :describeText="'物流号：'+msg">
                 <mu-avatar icon="flight_takeoff" backgroundColor="blue" slot="leftAvatar" />
               </mu-list-item>
               <div v-if="errorShow">
@@ -63,12 +63,18 @@
           };
           axios.get(AppConfig.url.getExpressDetail, {params}).then((res) => {
             console.log(res);
+            debugger
             if (res.status === 200) {
-              if(res.data.status===10001){
+              if(res.data.status=="10001"){
                   console.log('订单不存在');
                 this.errorShow=true;
               }else{
-                this.infoData=res.data;
+                  if(res.data.data&&res.data.data.length>0){
+                    this.infoData=res.data;
+                  }else{
+                    console.log('订单不存在');
+                    this.errorShow=true;
+                  }
               }
             }
           })
