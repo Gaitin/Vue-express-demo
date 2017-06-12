@@ -10,11 +10,11 @@
         <div class="paperTop">
           <mu-paper :zDepth="2">
             <mu-list>
-              <mu-list-item v-if="!errorShow" :title="infoData.com" :describeText="'物流号：'+msg">
+              <mu-list-item v-if="!errorShow" :title="infoData.com" :describeText="'物流号：'+id">
                 <mu-avatar icon="flight_takeoff" backgroundColor="blue" slot="leftAvatar" />
               </mu-list-item>
               <div v-if="errorShow">
-                <mu-list-item  title="物流单号不存在" :describeText="'物流号：'+msg">
+                <mu-list-item  title="物流单号不存在" :describeText="'物流号：'+id">
                   <mu-avatar icon="warning" backgroundColor="red" slot="leftAvatar" />
                 </mu-list-item>
               </div>
@@ -48,18 +48,17 @@
   export default {
         data () {
             return {
-                msg: 'Welcome to Your Vue.js App',
+                id: '',
                 activeStep: 0,
                 infoData:{},
                 errorShow:false
             }
         },
         created(){
-          this.msg=this.$route.query.id?this.$route.query.id:'';
-          console.log(this.$route.query.id);
-          this.msg=this.$route.query.id;
+          this.id=this.$route.params.id?this.$route.params.id:'';
+          console.log(this.$route.params);
           let params = {
-            id:this.$route.query.id
+            id:this.id
           };
           axios.get(AppConfig.url.getExpressDetail, {params}).then((res) => {
             console.log(res);

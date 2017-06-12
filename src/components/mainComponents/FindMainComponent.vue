@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    export default {
+  export default {
         data () {
             return {
               textValue:'',
@@ -25,7 +25,7 @@
         methods:{
           showDetail:function () {
               if(this.textValue!=''){
-                this.$router.push({path:'/info',query: {id:this.textValue}})
+                this.$router.push({name:'Info', params: { id: this.textValue }})
               }else{
                 this.toast = true;
                 if (this.toastTimer) clearTimeout(this.toastTimer)
