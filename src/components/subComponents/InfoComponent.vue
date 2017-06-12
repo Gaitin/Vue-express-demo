@@ -63,7 +63,6 @@
           };
           axios.get(AppConfig.url.getExpressDetail, {params}).then((res) => {
             console.log(res);
-            debugger
             if (res.status === 200) {
               if(res.data.status=="10001"){
                   console.log('订单不存在');
@@ -81,7 +80,7 @@
         },
         methods:{
           turnBefore:function () {
-            this.$router.push({path:'/'});
+            this.$router.push({path:'/FindMain'});
           }
         }
     }

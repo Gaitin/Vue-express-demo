@@ -5,23 +5,23 @@
         <mu-sub-header>寄件人信息</mu-sub-header>
         <div class="formLine">
           <span class="FormTitle">姓名</span>
-          <mu-text-field hintText="请输入姓名" class="demo-divider-form" :underlineShow="false"/>
+          <mu-text-field hintText="请输入姓名" class="demo-divider-form" :underlineShow="false" v-model="formInfo.send.sName"/>
         </div>
         <mu-divider/>
         <div class="formLine">
           <span class="FormTitle">手机号码</span>
-          <mu-text-field hintText="请手机号码" type="number" class="demo-divider-form" :underlineShow="false"/>
+          <mu-text-field hintText="请手机号码" type="number" class="demo-divider-form" :underlineShow="false" v-model="formInfo.send.sTel" />
         </div>
         <mu-divider/>
         <div class="formLine">
           <span class="FormTitle" >选择地区</span>
-          <selectAddressInput></selectAddressInput>
+          <selectAddressInput :changeSelect="changeSelectSend" />
         </div>
         <mu-divider/>
         <div class="formLine">
           <span class="FormTitle">详细地址</span>
           <mu-text-field hintText="详细地址" multiLine :rows="3" :rowsMax="5" class="demo-divider-form"
-                         :underlineShow="false"/>
+                         :underlineShow="false" v-model="formInfo.send.sDaddress" />
         </div>
       </mu-paper>
     </div>
@@ -30,33 +30,30 @@
         <mu-sub-header>收件人信息</mu-sub-header>
         <div class="formLine">
           <span class="FormTitle">姓名</span>
-          <mu-text-field hintText="请输入姓名" class="demo-divider-form" :underlineShow="false"/>
+          <mu-text-field hintText="请输入姓名" class="demo-divider-form" :underlineShow="false"  v-model="formInfo.receiver.rName"/>
         </div>
         <mu-divider/>
         <div class="formLine">
           <span class="FormTitle">手机号码</span>
-          <mu-text-field hintText="请手机号码" type="number" class="demo-divider-form" :underlineShow="false"/>
+          <mu-text-field hintText="请手机号码" type="number" class="demo-divider-form" :underlineShow="false"   v-model="formInfo.receiver.rTel" />
         </div>
         <mu-divider/>
         <div class="formLine">
           <span class="FormTitle" >选择地区</span>
-          <selectAddressInput></selectAddressInput>
-
-          <!--<mu-text-field hintText="选择地区" class="demo-divider-form" :underlineShow="false"-->
-                         <!--@focus="openAddressBottomSheet" :value="address"/>-->
+          <selectAddressInput  :changeSelect="changeSelectReceiver" />
         </div>
         <mu-divider/>
         <div class="formLine">
           <span class="FormTitle">详细地址</span>
           <mu-text-field hintText="详细地址" multiLine :rows="3" :rowsMax="5" class="demo-divider-form"
-                         :underlineShow="false"/>
+                         :underlineShow="false" v-model="formInfo.receiver.rDaddress" />
         </div>
       </mu-paper>
     </div>
     <div class="selectExpress">
       <mu-list>
-        <mu-list-item :title="expressName" @click="openBottomSheet">
-          <mu-avatar :src="expressImg" slot="leftAvatar"/>
+        <mu-list-item :title="formInfo.selectExpress[0]" @click="openBottomSheet">
+          <mu-avatar :src="formInfo.selectExpress[1]" slot="leftAvatar"/>
           <mu-icon value="keyboard_arrow_right" slot="right"/>
         </mu-list-item>
       </mu-list>
@@ -66,8 +63,7 @@
       <mu-paper>
         <div class="formLine">
           <span class="FormTitle">寄件类型</span>
-          <!--<mu-text-field hintText="请输入姓名" class="demo-divider-form" :underlineShow="false"/>-->
-          <mu-select-field v-model="listDefault" :labelFocusClass="['label-foucs']" class="demo-divider-form" :underlineShow="true">
+          <mu-select-field v-model="formInfo.listDefault" :labelFocusClass="['label-foucs']" class="demo-divider-form" :underlineShow="true">
             <mu-menu-item v-for="text,index in listType" :key="index" :value="index" :title="text" />
           </mu-select-field>
         </div>
@@ -78,14 +74,13 @@
       <mu-paper>
         <div class="formLine">
           <span class="FormTitle">付款方式</span>
-          <!--<mu-text-field hintText="请输入姓名" class="demo-divider-form" :underlineShow="false"/>-->
-          <mu-select-field v-model="PayDefault" :labelFocusClass="['label-foucs']" class="demo-divider-form" :underlineShow="true">
+          <mu-select-field v-model="formInfo.PayDefault" :labelFocusClass="['label-foucs']" class="demo-divider-form" :underlineShow="true">
             <mu-menu-item v-for="text,index in PayType" :key="index" :value="index" :title="text" />
           </mu-select-field>
         </div>
         <div class="formLine">
           <span class="FormTitle">保价金额</span>
-          <mu-text-field hintText="请输入保价金额" type="number" class="demo-divider-form" :underlineShow="false"/>
+          <mu-text-field hintText="请输入保价金额" type="number" class="demo-divider-form" :underlineShow="false" v-model="formInfo.Insurance_amount" />
         </div>
       </mu-paper>
     </div>
@@ -93,16 +88,16 @@
       <mu-paper>
         <div class="formLine">
           <span class="FormTitle">物品名称</span>
-          <mu-text-field hintText="请输入物品名称"  class="demo-divider-form" :underlineShow="false"/>
+          <mu-text-field hintText="请输入物品名称"  class="demo-divider-form" :underlineShow="false" v-model="formInfo.thingsName"/>
         </div>
         <div class="formLine">
           <span class="FormTitle">取件地址</span>
-          <mu-text-field hintText="请输入取件地址"  class="demo-divider-form" :underlineShow="false"/>
+          <mu-text-field hintText="请输入取件地址"  class="demo-divider-form" :underlineShow="false" v-model="formInfo.receiverAddress" />
         </div>
       </mu-paper>
     </div>
     <div class="btnBox">
-      <mu-raised-button label="立即下单" fullWidth backgroundColor="#3481ED" class="demo-raised-button" />
+      <mu-raised-button label="立即下单" @click="submitForm" fullWidth backgroundColor="#3481ED" class="demo-raised-button" />
     </div>
     <div class="expressSelect">
       <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet">
@@ -111,7 +106,7 @@
             <a href="javascript:;" @click="closeBottomSheet">取消</a>
             <a href="javascript:;" @click="closeBottomSheet">确定</a>
           </div>
-          <mu-picker :slots="expressSlots" :visible-item-count="5" @change="expressChange" :values="express"/>
+          <mu-picker :slots="expressSlots" :visible-item-count="5" @change="expressChange" :values="formInfo.selectExpress"/>
         </div>
       </mu-bottom-sheet>
     </div>
@@ -140,9 +135,8 @@
     },
     data () {
       return {
-        listDefault: 0,
+
         listType: ['个人件','公司件'],
-        PayDefault: 0,
         PayType: ['寄付','到付'],
         bottomSheet: false,
         expressSlots: [
@@ -152,9 +146,28 @@
             values: Object.keys(express)
           }
         ],
-        express: ['请选择快递', 'http://app.toon.mobi/images/3003/button_ip.png'],
         expressName: '请选择快递',
         expressImg: 'http://app.toon.mobi/images/3003/button_ip.png',
+        formInfo:{
+            send:{
+                sName:'',
+                sTel:'',
+                sAddress:['北京','朝阳'],
+                sDaddress:''
+            },
+            receiver:{
+              rName:'',
+              rTel:'',
+              rAddress:['北京','朝阳'],
+              rDaddress:''
+            },
+            selectExpress:['请选择快递', 'http://app.toon.mobi/images/3003/button_ip.png'],
+            listDefault: 0,
+            PayDefault: 0,
+            Insurance_amount:'',
+            thingsName:'',
+            receiverAddress:''
+        }
       }
     },
     methods: {
@@ -164,34 +177,23 @@
       openBottomSheet () {
         this.bottomSheet = true
       },
-      closeAddressBottomSheet () {
-        this.AddressBottomSheet = false
-      },
-      openAddressBottomSheet () {
-        this.AddressBottomSheet = true
-      },
       expressChange (value, index) {
         switch (index) {
           case 0:
-            this.expressName = value;
-            this.expressImg = express[value];
+            this.formInfo.selectExpress[0] = value;
+            this.formInfo.selectExpress[1] = express[value];
             break
         }
-        this.express = [this.expressName, this.expressImg]
+        this.formInfo.selectExpress = [this.formInfo.selectExpress[0], this.formInfo.selectExpress[1]]
       },
-      addressChange (value, index) {
-        switch (index) {
-          case 0:
-            this.addressProvince = value
-            const arr = address[value]
-            this.addressSlots[1].values = arr
-            this.addressCity = arr[0]
-            break
-          case 1:
-            this.addressCity = value
-            break
-        }
-        this.address = [this.addressProvince, this.addressCity]
+      submitForm(){
+          alert(JSON.stringify(this.formInfo));
+      },
+      changeSelectSend(value){
+          this.formInfo.send.sAddress=value;
+      },
+      changeSelectReceiver(value){
+        this.formInfo.receiver.rAddress=value;
       }
     }
   }

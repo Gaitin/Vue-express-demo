@@ -12,7 +12,7 @@
             <mu-icon value="keyboard_arrow_right" slot="right" color="pinkA200"/>
           </mu-list-item>
           <mu-divider />
-          <mu-list-item title="关于">
+          <mu-list-item title="关于" to="/About">
             <mu-icon value="report" slot="left" color="pinkA200"/>
             <mu-icon value="keyboard_arrow_right" slot="right" color="pinkA200"/>
           </mu-list-item>

@@ -3,23 +3,24 @@
     <top1header class="topheader"></top1header>
     <div class="bodyContainer" >
       <div class="tabPanel">
-      <div class="tab" v-if="bottomNav === 'send'">
-        <sendMainComponent></sendMainComponent>
-      </div>
-      <div class="tab" v-if="bottomNav === 'find'">
-        <findMainComponent></findMainComponent>
-      </div>
-      <div class="tab" v-if="bottomNav === 'own'">
-        <ownCenterComponent></ownCenterComponent>
-      </div>
+      <!--<div class="tab" v-show="bottomNav === 'send'">-->
+        <!--<sendMainComponent></sendMainComponent>-->
+      <!--</div>-->
+      <!--<div class="tab" v-show="bottomNav === 'find'">-->
+        <!--<findMainComponent></findMainComponent>-->
+      <!--</div>-->
+      <!--<div class="tab" v-show="bottomNav === 'own'">-->
+        <!--<ownCenterComponent></ownCenterComponent>-->
+      <!--</div>-->
+        <router-view transition="fade"></router-view>
       </div>
     </div>
     <div class="bottomNav">
       <mu-paper >
         <mu-bottom-nav :value="bottomNav" shift @change="handleChange">
-          <mu-bottom-nav-item value="send" title="寄快递"  icon="airport_shuttle"/>
-          <mu-bottom-nav-item value="find" title="查快递" icon="search"/>
-          <mu-bottom-nav-item value="own" title="我" icon="person"/>
+          <mu-bottom-nav-item value="send" title="寄快递"  to="/sendMain"  icon="airport_shuttle"/>
+          <mu-bottom-nav-item value="find" title="查快递" to="/FindMain"  icon="search"/>
+          <mu-bottom-nav-item value="own" title="我"  to="/ownCenter" icon="person"/>
         </mu-bottom-nav>
       </mu-paper>
     </div>

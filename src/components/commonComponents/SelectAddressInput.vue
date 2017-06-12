@@ -1,6 +1,5 @@
 <template>
     <div class="selectAddressInput">
-      <!--<mu-text-field hintText="选择地区" class="demo-divider-form" :underlineShow="false" @focus="openAddressBottomSheet" :value="address"/>-->
       <div class="AddressBox demo-divider-form">
         <span hintText="选择地区"  :underlineShow="false" @click="openAddressBottomSheet" >{{address[0]}} {{address[1]}}</span>
       </div>
@@ -56,6 +55,9 @@
     '台湾': ['台北市', '高雄市', '台北县', '桃园县', '新竹县', '苗栗县', '台中县', '彰化县', '南投县', '云林县', '嘉义县', '台南县', '高雄县', '屏东县', '宜兰县', '花莲县', '台东县', '澎湖县', '基隆市', '新竹市', '台中市', '嘉义市', '台南市']
   }
     export default {
+        props: {
+          changeSelect: Function
+        },
         data () {
             return {
               AddressBottomSheet: false,
@@ -71,6 +73,7 @@
                 }
               ],
               address: ['北京', '朝阳区'],
+//              address: this.location,
               addressProvince: '北京',
               addressCity: '朝阳区'
             }
@@ -94,7 +97,8 @@
               this.addressCity = value
               break
           }
-          this.address = [this.addressProvince, this.addressCity]
+          this.address = [this.addressProvince, this.addressCity];
+          this.changeSelect(this.address);
         }
       }
     }
