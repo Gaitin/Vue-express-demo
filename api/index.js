@@ -24,10 +24,9 @@ app.get('/getED', function (req, res) {
   getExpress.getExpressDetail(req, res,params);
 });
 
-// let url='172.31.243.45';
-const server = app.listen(8081,function () {
-  const host = server.address().address
-  const port = server.address().port
+let url='0.0.0.0';
+const server = app.listen(8081,url,function () {
+  const host = server.address().address;
+  const port = server.address().port;
   console.log("应用实例，访问地址为 http://%s:%s", host, port)
-
-})
+});
